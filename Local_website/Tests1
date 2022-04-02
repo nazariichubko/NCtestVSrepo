@@ -1,0 +1,33 @@
+import os
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Set PATH for chrome driver
+os.environ['PATH'] += r"C:\Users\nazar\git\NCtestVSrepo\NCtestVSrepo\Local_website"
+
+# Select Web browser for testing
+driver = webdriver.Chrome()
+
+# Open a webpage
+
+driver.get("https://demo.anhtester.com/jquery-download-progress-bar-demo.html")
+
+# wait till website load
+
+driver.implicitly_wait(30)
+
+# click Download button
+my_element = driver.find_element_by_id('downloadButton')
+my_element.click()
+
+# adding webdriver wait and checking expected result
+
+WebDriverWait(driver, 30).until(
+    EC.text_to_be_present_in_element(
+        (By.CLASS_NAME, 'progress-label'),# Element filtaration
+        'Complete!'# Expected text
+    )
+)
+
