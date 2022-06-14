@@ -1,0 +1,15 @@
+import time
+import pytest
+
+from NCtestVSrepo.wp_tests.website import TestWebsite
+
+with TestWebsite(teardown=True) as bot:
+    bot.navigate_to_login_page()
+    bot.enter_credentials("testuser1", "111")
+    time.sleep(5)
+    bot.navigate_to_homepage()
+    bot.navigate_to_custom_page()
+    bot.fill_contact_form()
+    bot.submit_form()
+    bot.check_contact_form_submission_success_message()
+
